@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Welcome</title>
+    <style>
+        *{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+        }
+        input[type='text']{
+            width:500px;
+        }
+    </style>
+</head>
+<body>
+    <h1>YouTube to iTunes</h1>
+    <h2>Step 2</h2>
+    <form action="startProcess" method="GET">
+        <p>Address: <input type="text" name="addr" id="addr" value="{{addr}}"></p>
+        <p><label for="name">Filename (without extension): </label>
+        <input type="text" name="name" value="{{name}}"></p>
+        <p><label for="artist">Artist: </label>
+        <input type="text" name="artist" value="{{artist}}"></p>
+        <p><label for="title">Title: </label>
+        <input type="text" name="title" value="{{title}}"></p>
+        <p><label for="changeVol">Change volume by: </label>
+        <input type="number" step="0.5" name="changeVol" value="1"> dB</p>
+        <p><input type="checkbox" name="addToiTunes" id="addToiTunes" checked> <label for="addToiTunes">add to iTunes</label></p>
+        <button type="submit">Submit</button>
+    </form>
+    <a href="/">Back</a>
+</body>
+</html>
