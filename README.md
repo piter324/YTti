@@ -14,6 +14,14 @@ This piece of software automatically downloads audio streams from selected YouTu
 1. Access it using your favorite web browser on your host IP address (port = 80 for simplicity)
 1. Follow instuctions displayed in your web browser
 1. Be patient, as it takes longer to download and convert some videos (and others not nessesarily)
-
-## Remember!
+### Remember!
 There's a "downloaded" folder in the program root, where all tracks are saved after conversion. They're not removed automatically, so keep this folder tidy by yourself, unless you want it to take a lot of disk space.
+
+
+
+## Changelog
+### 0.1
+- Downloading audio, converting it to MP3, adding ID3 tags and opening to add to iTunes library
+- Added volume adjustment for too loud or too quiet audio
+### 0.2
+- Added audio trimming

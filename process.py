@@ -12,6 +12,7 @@ def getInfo(address):
 
     fileInfo = {
         "name":yt.title,
+        "length":yt.length,
         "title":"",
         "artist":""
     }
@@ -37,19 +38,23 @@ def download(address, name):
     outputFullPath = yt.streams.filter(only_audio=True, mime_type='audio/mp4').order_by('bitrate').first().download(filename=name, output_path="downloaded")
     return outputFullPath
 
-def convertMP4toMP3(filepath, changeVol):
+def convertMP4toMP3(filepath, changeVol, trimFrom, trimTo):
+    if int(trimFrom) > int(trimTo): 
+        print("trimFrom cannot be higher than trimTo")
+        return False
+
     import subprocess
     import os
 
     newName = filepath[:-4]+".mp3"
-    completed = subprocess.run(["ffmpeg","-y","-i",filepath,"-filter:a","volume="+str(float(changeVol))+"dB",newName])
+    completed = subprocess.run(["ffmpeg","-y","-i",filepath,"-ss",str(int(trimFrom)),"-t",str(int(trimTo)-int(trimFrom)),"-filter:a","volume="+str(float(changeVol))+"dB",newName])
     if completed.returncode == 0:
         os.remove(filepath)
         print("File converted to MP3. MP4 is removed")
         return newName
     else:
         print("Error converting to MP3")
-        return 0 
+        return False
 
 def addID3(filepath, artist, title):
     import mutagen
@@ -70,10 +75,11 @@ def openFromCMD(filepath):
     subprocess.call(["explorer", filepath])
 
 def wholeProcess(address, info):
+    # print(info)
     outputFilePath = download(address, info['name'])
     if outputFilePath == None:
         return False
-    outputFilePath = convertMP4toMP3(outputFilePath, info['changeVol'])
+    outputFilePath = convertMP4toMP3(outputFilePath, info['changeVol'], info['trimFrom'], info['trimTo'])
     if outputFilePath == 0:
         return False
     addID3(outputFilePath, info['artist'], info['title'])
