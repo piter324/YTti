@@ -47,7 +47,7 @@ def convertMP4toMP3(filepath, changeVol, trimFrom, trimTo):
     import os
 
     newName = filepath[:-4]+".mp3"
-    completed = subprocess.run(["ffmpeg","-y","-i",filepath,"-ss",str(int(trimFrom)),"-t",str(int(trimTo)-int(trimFrom)),"-filter:a","volume="+str(float(changeVol))+"dB",newName])
+    completed = subprocess.run(["ffmpeg","-y","-i",filepath,"-ss",str(int(trimFrom)),"-t",str(int(trimTo)-int(trimFrom)),"-filter:a","volume="+str(float(changeVol))+"dB","-write_xing","0",newName])
     if completed.returncode == 0:
         os.remove(filepath)
         print("File converted to MP3. MP4 is removed")
@@ -72,7 +72,7 @@ def addID3(filepath, artist, title):
 
 def openFromCMD(filepath):
     import subprocess
-    subprocess.call(["explorer", filepath])
+    subprocess.call(["iTunes.Ink", filepath])
 
 def wholeProcess(address, info):
     # print(info)
