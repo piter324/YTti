@@ -72,7 +72,7 @@ def addID3(filepath, artist, title):
 
 def openFromCMD(filepath):
     import subprocess
-    subprocess.call(["iTunes.Ink", filepath])
+    subprocess.call(["iTunes.lnk", filepath])
 
 def wholeProcess(address, info):
     # print(info)
