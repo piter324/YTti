@@ -1,5 +1,8 @@
+import subprocess
+import os
+from pytube import YouTube
+
 def getInfo(address):
-    from pytube import YouTube
     try:
         yt = YouTube(address)
     except:
@@ -28,7 +31,6 @@ def getInfo(address):
     return fileInfo
 
 def download(address, name):
-    from pytube import YouTube
     try:
         yt = YouTube(address)
     except:
@@ -42,9 +44,6 @@ def convertMP4toMP3(filepath, changeVol, trimFrom, trimTo):
     if int(trimFrom) > int(trimTo): 
         print("trimFrom cannot be higher than trimTo")
         return False
-
-    import subprocess
-    import os
 
     newName = filepath[:-4]+".mp3"
     completed = subprocess.run(["ffmpeg","-y","-i",filepath,"-ss",str(int(trimFrom)),"-t",str(int(trimTo)-int(trimFrom)),"-filter:a","volume="+str(float(changeVol))+"dB","-write_xing","0",newName])
@@ -69,10 +68,13 @@ def addID3(filepath, artist, title):
     audiofile['artist'] = artist
     audiofile['title'] = title
     audiofile.save()
+    print("ID3 added")
 
 def openFromCMD(filepath):
-    import subprocess
-    subprocess.call(["iTunes.lnk", filepath])
+    print("Opening "+os.path.join(os.path.dirname(os.path.abspath(__file__)), filepath)+" using iTunes")
+    subprocess.Popen(["start","iTunes.lnk",os.path.join(os.path.dirname(os.path.abspath(__file__)), filepath)], shell=True)
+    print("Opened in iTunes")
+    return True
 
 def wholeProcess(address, info):
     # print(info)

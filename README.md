@@ -28,4 +28,4 @@ There's a "downloaded" folder in the program root, where all tracks are saved af
 ### 0.3
 - Fixed a bug with incorrect track duration in iTunes. Had to remove XING header though in ffmpeg.
 ### 0.4
-- Changed the last step of the process from opening file and letting the OS decide which app to use to opening the converted *.mp3 file in iTunes directly using a shortcut to it placed in the program root folder. That way iTunes doesn't have to be a default *.mp3 player.
+- A converted *.mp3 file is opened in iTunes directly using a shortcut in the program root folder. That way iTunes doesn't have to be a default *.mp3 player.
